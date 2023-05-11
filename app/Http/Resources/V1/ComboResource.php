@@ -19,7 +19,8 @@ class ComboResource extends JsonResource
         'name' => $this->name,
         'price' => $this->price,
         'discount' => $this->discount,
-        'total_price' => $this->total_price
+        'total_price' => $this->total_price,
+        'services' => ServiceResource::collection($this->whenLoaded('services'))
         ];
     }
 }

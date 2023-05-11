@@ -5,7 +5,7 @@ use App\Http\Controllers\Api\V1\CategoryController;
 use App\Http\Controllers\Api\V1\ProductController;
 use App\Http\Controllers\Api\V1\DisposableController;
 use App\Http\Controllers\Api\V1\ServiceController;
-use App\Http\Controllers\Api\V1\CombosController;
+use App\Http\Controllers\Api\V1\ComboController;
 
 
 Route::group(['prefix' => 'v1'], function() {
@@ -25,5 +25,5 @@ Route::group(['prefix' => 'v1'], function() {
     });
         
     Route::group(['prefix' => 'v1'], function() {
-        Route::apiResource('combos', CombosController::class);
+        Route::apiResource('combos', ComboController::class);
         });

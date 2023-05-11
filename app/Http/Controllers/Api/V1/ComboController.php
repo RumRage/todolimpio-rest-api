@@ -7,15 +7,16 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StoreComboRequest;
 use App\Models\Combo;
 use App\Http\Resources\V1\ComboResource;
+use App\Http\Resources\V1\ComboCollection;
 
 
-class CombosController extends Controller
+class ComboController extends Controller
 {
     //
 
     public function index()
     {
-        return response()->json("Combos Index ok");
+        return new ComboCollection(Combo::all());
     }
 
     public function store(StoreComboRequest $request)
@@ -37,17 +38,24 @@ class CombosController extends Controller
     public function update(StoreComboRequest $request, Combo $combo)
     {
         $combo->update($request->validated());
-    
+
         // Sincronizar servicios del combo actualizado
         $combo->services()->sync($request->input('service_id', []));
-    
+
         return response()->json("Combo actualizado correctamente");
     }
 
-
     public function show(Combo $combo)
     {
+        $combo->load('services');
         return new ComboResource($combo);
     }
+
+    public function destroy(Combo $combo)
+    {
+        $combo->delete();
+        return response()->json("Combo eliminado correctamente");
+    }
+    
 
 }
