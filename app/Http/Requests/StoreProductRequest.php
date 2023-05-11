@@ -23,12 +23,20 @@ class StoreProductRequest extends FormRequest
     {
         return [
             //
+<<<<<<< HEAD
             
+=======
+
+>>>>>>> a0a0412fc406268adaf849b81856f8f8f63919a8
             'name' => 'required',
             'description' => 'required',
             'price' => 'required',
             'supplier' => 'required',
             'stock' => 'required'
+<<<<<<< HEAD
             ];
+=======
+        ];
+>>>>>>> a0a0412fc406268adaf849b81856f8f8f63919a8
     }
 }
