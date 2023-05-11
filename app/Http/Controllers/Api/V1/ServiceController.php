@@ -22,4 +22,10 @@ class ServiceController extends Controller
         return response()->json("Servicio creado correctamente");
     }
 
+    public function update(StoreServiceRequest $request, Service $service)
+    {
+        $service->update($request->validated());
+        return response()->json("Servicio actualizado correctamente");
+    }
+
 }
