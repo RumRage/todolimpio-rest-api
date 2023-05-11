@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreServiceRequest;
 use App\Models\Service;
+use App\Http\Resources\V1\ServiceResource;
+use App\Http\Resources\V1\ServiceCollection;
+
 
 class ServiceController extends Controller
 {
@@ -13,7 +16,7 @@ class ServiceController extends Controller
 
     public function index()
     {
-        return response()->json("Servicios Index ok");
+        return new ServiceCollection(Service::all());
     }
 
     public function store(StoreServiceRequest $request)
@@ -26,6 +29,17 @@ class ServiceController extends Controller
     {
         $service->update($request->validated());
         return response()->json("Servicio actualizado correctamente");
+    }
+
+    public function show(Service $service)
+    {
+        return new ServiceResource($service);
+    }
+
+    public function destroy(Service $service)
+    {
+        $service->delete();
+        return response()->json("Servicio eliminado correctamente");
     }
 
 }
