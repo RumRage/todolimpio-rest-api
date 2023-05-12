@@ -16,6 +16,7 @@ class ServiceController extends Controller
 
     public function index()
     {
+        $services = Service::with('category')->get();
         return new ServiceCollection(Service::all());
     }
 
