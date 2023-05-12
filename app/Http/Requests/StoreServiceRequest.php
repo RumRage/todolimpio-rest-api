@@ -23,7 +23,6 @@ class StoreServiceRequest extends FormRequest
     {
         return [
             //
-            
             'category_id' => 'required',
             'name' => 'required',
             'price' => 'required'

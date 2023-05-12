@@ -12,7 +12,7 @@ use App\Http\Resources\V1\DisposableCollection;
 class DisposableController extends Controller
 {
     //
-
+ 
     public function index()
     {
         return new DisposableCollection(Disposable::all());

@@ -7,6 +7,7 @@ use Illuminate\Validation\Rule;
 
 class StoreDisposableRequest extends FormRequest
 {
+    
     /**
      * Determine if the user is authorized to make this request.
      */
@@ -29,6 +30,6 @@ class StoreDisposableRequest extends FormRequest
             'price' => 'required',
             'supplier' => 'required',
             'stock' => 'required'
-        ];
+            ];
     }
 }
