@@ -16,6 +16,7 @@ class ComboController extends Controller
 
     public function index()
     {
+        $combos = Combo::with('services')->get();
         return new ComboCollection(Combo::all());
     }
 

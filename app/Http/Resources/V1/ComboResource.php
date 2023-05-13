@@ -14,13 +14,28 @@ class ComboResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-    return [
-        'id' => $this->id,
-        'name' => $this->name,
-        'price' => $this->price,
-        'discount' => $this->discount,
-        'total_price' => $this->total_price,
-        'services' => ServiceResource::collection($this->whenLoaded('services'))
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'price' => $this->price,
+            'discount' => $this->discount,
+            'total_price' => $this->total_price,
+            'services' => $this->services->map(function ($service) {
+                return new ServiceResource($service);
+            })->pluck(['name', 'price']),
+        ];
+
+       
+    }
+}
+
+class ServiceResource extends JsonResource
+{
+public function toArray($request)
+    {
+        return [
+            'name' => $this->name,
+            'price' => $this->price,
         ];
     }
 }
