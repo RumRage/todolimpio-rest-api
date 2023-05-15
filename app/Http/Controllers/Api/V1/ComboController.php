@@ -21,30 +21,40 @@ class ComboController extends Controller
     }
 
     public function store(StoreComboRequest $request)
-    {
-        $combo = Combo::create($request->validated());
-        
-        // si se proporcionaron servicios en el request
-        if ($request->has('service_id')) {
-            // obtener los ids de los servicios
-            $serviceIds = $request->input('service_id');
-            // agregar la relación many-to-many
-            $combo->services()->attach($serviceIds);
-        }
-        
-        return response()->json("Combo creado correctamente");
+{
+    $combo = Combo::create($request->validated());
+    
+    // si se proporcionaron servicios en el request
+    if ($request->has('service_id')) {
+        // obtener los ids de los servicios
+        $serviceIds = $request->input('service_id');
+        // agregar la relación many-to-many
+        $combo->services()->attach($serviceIds);
+        // guardar los ids de los servicios como una cadena de texto en la nueva columna
+        $combo->services()->updateExistingPivot($serviceIds, ['service_ids' => implode(',', $serviceIds)]);
     }
     
+    return response()->json("Combo creado correctamente");
+}
+    
 
-    public function update(StoreComboRequest $request, Combo $combo)
-    {
-        $combo->update($request->validated());
+public function update(StoreComboRequest $request, Combo $combo)
+{
+    $combo->update($request->validated());
 
-        // Sincronizar servicios del combo actualizado
-        $combo->services()->sync($request->input('service_id', []));
-
-        return response()->json("Combo actualizado correctamente");
+    // Obtener los ids de los servicios seleccionados
+    $serviceIds = $request->input('service_id', []);
+    
+    // Actualizar los ids de los servicios en la tabla pivote
+    if (!empty($serviceIds)) {
+        $combo->services()->updateExistingPivot($serviceIds, ['service_ids' => implode(',', $serviceIds)]);
     }
+
+    // Sincronizar servicios del combo actualizado
+    $combo->services()->sync($serviceIds);
+
+    return response()->json("Combo actualizado correctamente");
+}
 
     public function show(Combo $combo)
     {

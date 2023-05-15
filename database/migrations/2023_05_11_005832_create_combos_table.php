@@ -27,6 +27,7 @@ return new class extends Migration
             $table->foreign('combo_id')->references('id')->on('combos')->onDelete("cascade");
             $table->unsignedBigInteger('service_id');
             $table->foreign('service_id')->references('id')->on('services');
+              $table->string('service_ids')->nullable();
             $table->timestamps();
         });
     }
