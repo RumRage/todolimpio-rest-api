@@ -20,9 +20,7 @@ class ComboResource extends JsonResource
             'price' => $this->price,
             'discount' => $this->discount,
             'total_price' => $this->total_price,
-            'services' => $this->services->map(function ($service) {
-                return new ServiceResource($service);
-            })->pluck(['name', 'price']),
+            'services' => ServiceResource::collection($this->services),
         ];
 
        
