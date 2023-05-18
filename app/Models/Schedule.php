@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Model; 
 
 class Schedule extends Model
 {
@@ -13,6 +13,6 @@ class Schedule extends Model
 
     public function combos()
     {
-        return $this->belongsToMany(Combo::class, 'combo_schedule', 'combo_id', 'schedule_id');
+        return $this->belongsToMany(Combo::class, 'combo_schedule', 'schedule_id', 'combo_id');
     }
 }

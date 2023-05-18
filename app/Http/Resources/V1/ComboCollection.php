@@ -13,7 +13,7 @@ class ComboCollection extends ResourceCollection
      * @return array<int|string, mixed>
      */
     public function toArray($request)
-    {
+    { 
         return [
             'data' => $this->collection->map(function ($combo) {
                 return [

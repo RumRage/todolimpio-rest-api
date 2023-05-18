@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('address');
             $table->datetime('date_time');
             $table->decimal('price', 8, 2);
-            $table->decimal('discount', 8, 2);
+            $table->decimal('discount', 8, 2); 
             $table->decimal('total_price', 8, 2);
             $table->enum('payments', ['Efectivo', 'Transferencia']);
             $table->enum('status', ['Hecho', 'Pendiente', 'Cancelado'])->default('Pendiente');
@@ -28,10 +28,11 @@ return new class extends Migration
 
         Schema::create('combo_schedule', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('combo_id');
-            $table->foreign('combo_id')->references('id')->on('combos')->onDelete("cascade");
             $table->unsignedBigInteger('schedule_id');
-            $table->foreign('schedule_id')->references('id')->on('schedules');
+            $table->foreign('schedule_id')->references('id')->on('schedules')->onDelete("cascade");
+            $table->unsignedBigInteger('combo_id');
+            $table->foreign('combo_id')->references('id')->on('combos');
+            $table->string('combo_ids')->nullable();
             $table->timestamps();
         });
     }

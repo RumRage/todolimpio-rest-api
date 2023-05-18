@@ -32,5 +32,5 @@ class StoreComboRequest extends FormRequest
             'service_id' => 'required|array',
             'service_id.*' => 'required|integer',
         ];
-    }
+    } 
 }

@@ -29,7 +29,7 @@ class ScheduleCollection extends ResourceCollection
             'status' => $schedule->status,
             'combos' => ComboResource::collection($schedule->combos),
             ];
-        }),
+        }), 
     ];
     }
 }

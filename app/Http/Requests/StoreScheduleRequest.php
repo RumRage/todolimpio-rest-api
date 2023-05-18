@@ -21,7 +21,7 @@ class StoreScheduleRequest extends FormRequest
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array|string>
      */
     public function rules(): array
-    {
+    { 
         return [
             //
             'name' => 'required|string',
@@ -31,7 +31,7 @@ class StoreScheduleRequest extends FormRequest
             'price' => 'required|numeric',
             'discount' => 'required|numeric',
             'total_price' => 'required|numeric',
-            'payments' => 'required|',
+            'payments' => 'required',
             'combo_id' => 'required|array',
             'combo_id.*' => 'required|integer',
         ];

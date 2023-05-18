@@ -12,7 +12,7 @@ class ScheduleResource extends JsonResource
      *
      * @return array<string, mixed>
      */
-    public function toArray($request)
+    public function toArray(Request $request): array
     {
         return [
             'id' => $this->id,
@@ -25,9 +25,13 @@ class ScheduleResource extends JsonResource
             'total_price' => $this->total_price,
             'payments' => $this->payments,
             'status' => $this->status,
-            'combos' => ComboResource::collection($this->whenLoaded('combos')),
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
+            'combos' => $this->combos->map(function ($combo) {
+                return [
+                    'id' => $combo->id,
+                    'name' => $combo->name,
+                    'total_price' => $combo->total_price,
+                ];
+            })
         ];
     }
 }
