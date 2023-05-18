@@ -20,20 +20,14 @@ class ComboResource extends JsonResource
             'price' => $this->price,
             'discount' => $this->discount,
             'total_price' => $this->total_price,
-            'services' => ServiceResource::collection($this->services),
-        ];
-
-       
-    }
-}
-
-class ServiceResource extends JsonResource
-{
-public function toArray($request)
-    {
-        return [
-            'name' => $this->name,
-            'price' => $this->price,
+            'services' => $this->services->map(function ($service) {
+                return [
+                    'id' => $service->id,
+                    'name' => $service->name,
+                    'price' => $service->price,
+                ];
+            }),
         ];
     }
 }
+
