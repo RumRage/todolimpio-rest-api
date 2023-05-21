@@ -21,7 +21,7 @@ return new class extends Migration
             $table->decimal('price', 8, 2);
             $table->decimal('discount', 8, 2); 
             $table->decimal('total_price', 8, 2);
-            $table->enum('payments', ['Efectivo', 'Transferencia']);
+            $table->enum('payments', [1, 2, 3])->default(1);
             $table->enum('status', ['Hecho', 'Pendiente', 'Cancelado'])->default('Pendiente');
             $table->timestamps();
         });
