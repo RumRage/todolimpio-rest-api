@@ -31,5 +31,7 @@ Route::group(['prefix' => 'v1'], function() {
 
 Route::group(['prefix' => 'v1'], function() {
     Route::apiResource('schedules', ScheduleController::class);
+    Route::put('schedules/{schedule}/status', [ScheduleController::class, 'updateStatus']);
     });
-            
+
+   

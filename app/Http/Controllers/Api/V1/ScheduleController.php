@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StoreScheduleRequest;
 use App\Models\Schedule;
 use App\Http\Resources\V1\ScheduleResource;
+use App\Http\Requests\UpdateScheduleStatusRequest;
 use App\Http\Resources\V1\ScheduleCollection;
 
 
@@ -57,6 +58,16 @@ class ScheduleController extends Controller
         $schedule->combos()->sync($comboIds);
         return response()->json("Servicio de la agenda actualizado correctamente");
     }
+
+    public function updateStatus(UpdateScheduleStatusRequest $request, Schedule $schedule)
+{
+    $validatedData = $request->validated();
+
+    $schedule->status = $validatedData['status'];
+    $schedule->save();
+
+    return response()->json('Estado de la agenda actualizado correctamente');
+}
 
     public function show(Schedule $schedule)
     {
