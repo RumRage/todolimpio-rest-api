@@ -59,15 +59,15 @@ class ScheduleController extends Controller
         return response()->json("Servicio de la agenda actualizado correctamente");
     }
 
-    public function updateStatus(UpdateScheduleStatusRequest $request, Schedule $schedule)
-{
-    $validatedData = $request->validated();
+        public function updateStatus(UpdateScheduleStatusRequest $request, Schedule $schedule)
+    {
+        $validatedData = $request->validated();
 
-    $schedule->status = $validatedData['status'];
-    $schedule->save();
+        $schedule->status = $validatedData['status'];
+        $schedule->save();
 
-    return response()->json('Estado de la agenda actualizado correctamente');
-}
+        return response()->json('Estado de la agenda actualizado correctamente');
+    }
 
     public function show(Schedule $schedule)
     {
